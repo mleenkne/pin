@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire interactif</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+<form id="quizForm">
+    <h2>Question 1: Quelle est la capitale de la France?</h2>
+    <input type="text" id="answer1" required>
+    <button type="button" onclick="checkAnswer('answer1', '2602')">Vérifier la réponse</button>
+
+    <div id="result1"></div>
+
+    
+    <button type="button" onclick="resetQuiz()">Recommencer le questionnaire</button>
+</form>
+
+<script>
+    function checkAnswer(id, correctAnswer) {
+        var userAnswer = document.getElementById(id).value.toLowerCase();
+        var resultDiv = document.getElementById('result' + id.slice(-1));
+
+        if (userAnswer === correctAnswer.toLowerCase()) {
+            resultDiv.innerHTML = '<p style="color: green;">Le téléphone est déverrouillé mais indique qu'il s'auto-détruira dans 5 secondes. Vous vous débarrassez de la carte 9 et prenez la carte 29</p>';
+        } else {
+            resultDiv.innerHTML = '<p style="color: red;">Mauvaise réponse. Essayez à nouveau.</p>';
+        }
+    }
+
+    function resetQuiz() {
+        var forms = document.getElementsByTagName('form');
+        for (var i = 0; i < forms.length; i++) {
+            forms[i].reset();
+        }
+
+        var resultDivs = document.querySelectorAll('[id^="result"]');
+        for (var i = 0; i < resultDivs.length; i++) {
+            resultDivs[i].innerHTML = '';
+        }
+    }
+</script>
+
+</body>
+</html>
